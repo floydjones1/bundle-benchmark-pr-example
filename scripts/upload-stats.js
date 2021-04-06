@@ -42,12 +42,17 @@ exec(`aws s3 ls ${S3Bucket} --human-readable`, (error, stdout, stderr) => {
   } else {
     throw `Here are the current files ${fileNames.join(" ")}`;
   }
-
+  console.log("uploading");
   exec(`aws s3 cp ./dist/stats.json ${S3Bucket}/stats-main.json`, handleError);
   exec(`aws s3 cp ./files.json ${S3Bucket}/files-main.json`, handleError);
+  console.log("done uploading");
 });
 
-function handleError(error) {
+function handleError(error, stderr) {
+  if (stderr) {
+    console.log(error);
+    return;
+  }
   if (error) {
     throw error;
   }
