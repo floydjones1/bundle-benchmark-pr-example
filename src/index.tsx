@@ -14,7 +14,7 @@ function App() {
   const [num, setNum] = useState(0);
   const [data, setData] = useState<Array<Data>>([]);
   let date = new Date();
-
+  const number = 1000;
   const handleIncrement = () => {
     setNum(num + 1);
   };
