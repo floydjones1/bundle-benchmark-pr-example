@@ -18,8 +18,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
       - name: Generate statistician file
-        run: node ./scripts/statistician.js
+        run: node ./scripts/statistician-generate.js
       - name: Pull old stats
         run: node ./scripts/fetch-main-stats.js
+      - run: ls 
       - name: Compare stats
         run: node ./scripts/bundle-diff.js --user floydjones1 --repo bundle-benchmark-pr-example --pr ${{ github.event.number }} --token ${{ secrets.GITHUB_TOKEN }}
