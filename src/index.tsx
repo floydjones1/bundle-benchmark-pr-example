@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Button from "./components/Button";
+import { Canvas } from "react-three-fiber";
 
 // import default style
 import "./main.css";
@@ -14,7 +15,7 @@ function App() {
   const [num, setNum] = useState(0);
   const [data, setData] = useState<Array<Data>>([]);
   let date = new Date();
-
+  const number = 1000;
   const handleIncrement = () => {
     setNum(num + 1);
   };
@@ -33,7 +34,7 @@ function App() {
   console.log(data[0]?.title);
   return (
     <div className="App">
-      <h1 style={{ width: "100%" }}>Welcome to App! {date.toDateString()}</h1>
+      {/* <h1 style={{ width: "100%" }}>Welcome to App! {date.toDateString()}</h1>
 
       <h3>Your number is {num}</h3>
       <Button text="Increment Me!" onClick={handleIncrement} />
@@ -43,7 +44,10 @@ function App() {
         {data.map((row) => (
           <li key={row.id}>{row.title}</li>
         ))}
-      </ul>
+      </ul> */}
+      <Canvas>
+        <fog attach="fog" args={["black", 5, 15]} />
+      </Canvas>
     </div>
   );
 }
