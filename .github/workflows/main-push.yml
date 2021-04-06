@@ -14,5 +14,13 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Build App
         run: yarn build
-      - name: List files
-        run: ls -a
+      - name: Generate statistican file
+        run: node ./scripts/statistician-generate.js
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+      - name: Upload stats files
+        run: node ./scripts/upload-stats.js
